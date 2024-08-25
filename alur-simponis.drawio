@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.7">
   <diagram name="Page-1" id="-_9zb6RwKj41XNHzX8Fn">
-    <mxGraphModel dx="217" dy="485" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1085" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -12,8 +12,14 @@
         <mxCell id="NiA0qLHuh1PLWfHYA17D-1" value="Login" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="20" y="370" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="-0vQMCh2lmnWV789NQCa-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NiA0qLHuh1PLWfHYA17D-4" target="-0vQMCh2lmnWV789NQCa-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-0vQMCh2lmnWV789NQCa-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NiA0qLHuh1PLWfHYA17D-4" target="-0vQMCh2lmnWV789NQCa-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="NiA0qLHuh1PLWfHYA17D-4" value="Siswa" style="whiteSpace=wrap;html=1;rounded=1;" parent="1" vertex="1">
-          <mxGeometry x="220" y="370" width="120" height="60" as="geometry" />
+          <mxGeometry x="319" y="370" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="NiA0qLHuh1PLWfHYA17D-20" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -39,8 +45,8 @@
         <mxCell id="nGJUvvnxSwFZKM965cP_-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="NiA0qLHuh1PLWfHYA17D-30" target="nGJUvvnxSwFZKM965cP_-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NiA0qLHuh1PLWfHYA17D-30" value="Halaman&lt;div&gt;&amp;nbsp;pelanggaran&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="1" vertex="1">
-          <mxGeometry x="320" y="521.4324588260137" width="120" height="60" as="geometry" />
+        <mxCell id="NiA0qLHuh1PLWfHYA17D-30" value="Cari nama siswa" style="whiteSpace=wrap;html=1;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="630.0024588260137" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="nGJUvvnxSwFZKM965cP_-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nGJUvvnxSwFZKM965cP_-5" target="nGJUvvnxSwFZKM965cP_-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -51,17 +57,20 @@
         <mxCell id="nGJUvvnxSwFZKM965cP_-10" value="Mengelola data laporan guru dan siswa" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="320" y="210" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="nGJUvvnxSwFZKM965cP_-14" value="Lihat Pelanggaran" style="whiteSpace=wrap;html=1;rounded=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="521.4324588260137" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="-0vQMCh2lmnWV789NQCa-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-0vQMCh2lmnWV789NQCa-1" target="-0vQMCh2lmnWV789NQCa-3">
+        <mxCell id="-0vQMCh2lmnWV789NQCa-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="nGJUvvnxSwFZKM965cP_-14" target="-0vQMCh2lmnWV789NQCa-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="-0vQMCh2lmnWV789NQCa-1" value="Halaman Poin" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="661.4324588260137" width="120" height="60" as="geometry" />
+        <mxCell id="nGJUvvnxSwFZKM965cP_-14" value="Lihat data siswa dan riwayat pelanggaran" style="whiteSpace=wrap;html=1;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="305" y="630.0024588260137" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="-0vQMCh2lmnWV789NQCa-3" value="Memberi Poin" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="661.4324588260137" width="120" height="60" as="geometry" />
+        <mxCell id="-0vQMCh2lmnWV789NQCa-1" value="Halaman Jenis pelanggaran" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="319" y="521.0024588260137" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-0vQMCh2lmnWV789NQCa-5" value="Halaman pemberian poin" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="630.0024588260137" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-0vQMCh2lmnWV789NQCa-8" value="Lihat riwayat pelanggaran" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="519" y="370" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
