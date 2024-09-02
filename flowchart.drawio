@@ -55,7 +55,7 @@
         <mxCell id="9KyVt1tDY5ZcNBMKhhcq-17" value="Menampilkan Data&lt;div&gt;Siswa&lt;/div&gt;" style="shape=parallelogram;html=1;strokeWidth=1;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="418" y="430" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="9KyVt1tDY5ZcNBMKhhcq-19" value="Melakukan&amp;nbsp;&lt;div&gt;Kesalahan?&lt;/div&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="9KyVt1tDY5ZcNBMKhhcq-19" value="Siswa Melakukan Kesalahan" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="445" y="280" width="95" height="80" as="geometry" />
         </mxCell>
         <mxCell id="9KyVt1tDY5ZcNBMKhhcq-22" value="No" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
