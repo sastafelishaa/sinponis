@@ -1,10 +1,14 @@
-<template>
-  <div>
-    <h1>tunggu sebentar.....</h1>
-  </div>
-</template>
-
 <script setup>
+useHead({
+  title: "Sinponis",
+  meta: [
+    {
+      name: "description",
+      content: "Halaman Logout",
+    },
+  ],
+});
+
 const supabase = useSupabaseClient();
 
 async function logout() {
@@ -17,6 +21,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-
-</style>
+<template>
+  <div>
+    <h1 class="mt-5 text-center">tunggu sebentar.....</h1>
+  </div>
+</template>

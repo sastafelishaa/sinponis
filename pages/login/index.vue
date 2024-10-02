@@ -1,14 +1,27 @@
 <script setup>
+useHead({
+  title: "Sinponis",
+  meta: [
+    {
+      name: "description",
+      content: "Halaman Login",
+    },
+  ],
+});
+
 const supabase = useSupabaseClient();
 const email = ref("");
 const password = ref("");
+const loading = ref(false);
 
 const Login = async () => {
+  loading.value = true;
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
   });
   if (data) {
+    loading.value = false;
     navigateTo("/");
   }
   if (error) throw error;
@@ -46,7 +59,8 @@ definePageMeta({
               type="submit"
               class="btn btn-primary text-white rounded-2 px-4 text-center"
             >
-              LOGIN
+              <span v-if="loading">LOADING...</span>
+              <span v-else="">LOGIN</span>
             </button>
           </form>
         </div>

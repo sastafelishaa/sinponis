@@ -31,18 +31,38 @@ onMounted(() => {
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center my-4">JENIS PELANGGARAN</h2>
-        <!-- <div class="input my-3">
-          <form @submit.prevent="getSiswa">
-            <input
-              v-model="keyword"
-              type="search"
-              class="form-control rounded-5"
-              placeholder="Cari Siswa"
-            />
-          </form>
-        </div> -->
 
-        <div class="table-responsive">
+        <div class="accordion" id="accordionExample">
+          <div v-for="(jenisp, i) in jenis" :key="i" class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                :data-bs-target="'#collapse' + jenisp.id"
+                aria-expanded="false"
+                :aria-controls="'collapse' + jenisp.id"
+              >
+                {{ jenisp.jenis_p.nama }}
+              </button>
+            </h2>
+            <div
+              :id="'collapse' + jenisp.id"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <ul>
+                  <li>Jenis Pelanggaran : {{ jenisp.sub_jenisp }}</li>
+                  <li>Konsekwensi : {{ jenisp.konsekw }}</li>
+                  <li>Poin : {{ jenisp.poin }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="table-responsive">
           <table class="table table-bordered">
             <thead class="table-secondary">
               <tr class="text-center">
@@ -63,7 +83,7 @@ onMounted(() => {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
