@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <!-- <div>
     <h1 class="mt-5 text-center">tunggu sebentar.....</h1>
-  </div>
+  </div> -->
 </template>

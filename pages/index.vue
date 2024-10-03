@@ -55,7 +55,7 @@ onMounted(() => {
             <input
               v-model="keyword"
               type="search"
-              class="form-control rounded-5"
+              class="shadow-sm form-control rounded-5"
               placeholder="Cari Siswa"
             />
           </div>
@@ -86,6 +86,35 @@ onMounted(() => {
           </div>
           <div class="row">
             <div class="col">
+              <!-- <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse"
+                      aria-expanded="false"
+                      aria-controls="collapse"
+                    >
+                      Pelanggaran
+                    </button>
+                  </h2>
+                  <div
+                    id="collapse"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      <ul>
+                        <li>Jenis Pelanggaran :</li>
+                        <li>Konsekwensi :</li>
+                        <li>Poin :</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
               <!-- <div class="table-responsive">
                 <table class="table mt-3 table-bordered">
                   <thead class="table-secondary">
@@ -100,7 +129,7 @@ onMounted(() => {
                     <tr v-for="(data, i) in poin" :key="i">
                       <td>{{ i + 1 }}</td>
                       <td>{{ data.jenis_p.nama }}</td>
-                      <td>{{ data.sub_jenisp.konsekw }}</td>
+                      <td>{{ data.sub_jenis_p.konsekw }}</td>
                       <td>{{ data.poin.jumlah_poin }}</td>
                     </tr>
                   </tbody>
