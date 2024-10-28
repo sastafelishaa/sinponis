@@ -4,7 +4,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Halaman Tambah Poin",
+      content: "Halaman Pengurangan Poin",
     },
   ],
 });
@@ -14,7 +14,6 @@ const supabase = useSupabaseClient();
 const route = useRoute();
 
 const jenis = ref([]);
-
 const sub_jenis = ref([]);
 
 const form = ref({
@@ -22,13 +21,14 @@ const form = ref({
   jenis_p: "",
   sub_jenisp: "",
   poin: "",
+  jumlah_poin: "",
 });
 
 const getSiswa = async () => {
   const siswaId = route.params.id;
   const { data, error } = await supabase
     .from("siswa")
-    .select("id, nama")
+    .select("id, nama, point")
     .eq("id", siswaId)
     .single();
 
@@ -40,13 +40,16 @@ const getSiswa = async () => {
 const getPoint = async (event) => {
   let idpoint = event.target.value;
   form.value.sub_jenisp = parseInt(idpoint);
+
   const { data, error } = await supabase
     .from("sub_jenis_p")
-    .select(`poin(id,jumlah_poin)`)
+    .select("poin(id, jumlah_poin)")
     .eq("id", idpoint)
     .single();
+
   if (data) {
-    form.value.poin = data.poin.jumlah_poin;
+    form.value.poin = data.poin.id;
+    form.value.jumlah_poin = data.poin.jumlah_poin;
   }
 };
 
@@ -69,84 +72,56 @@ const getPelanggaran = async (event) => {
   if (data) sub_jenis.value = data;
 };
 
-// Mengurangi poin dari siswa
-const reducePoints = async (siswaId, subJenisId) => {
+const ubahPoint = async () => {
   try {
-    console.log(
-      "Mengurangi poin untuk siswa:",
-      siswaId,
-      "dengan sub_jenis:",
-      subJenisId
-    ); // Log info siswa dan subJenis
-
-    // Ambil jumlah poin dari sub_jenis_p yang dipilih
-    const { data: subJenisData, error: subJenisError } = await supabase
-      .from("sub_jenis_p")
-      .select(`poin(id,jumlah_poin)`)
-      .eq("id", subJenisId)
-      .single();
-
-    if (subJenisError || !subJenisData) {
-      console.error("Error fetching points:", subJenisError);
-      return;
-    }
-
-    const jumlahPoin = subJenisData.poin.jumlah_poin;
-    console.log("Jumlah poin yang akan dikurangi:", jumlahPoin); // Log poin yang akan dikurangi
-
-    // Ambil poin saat ini dari siswa
     const { data: siswaData, error: siswaError } = await supabase
       .from("siswa")
-      .select("point")
-      .eq("id", siswaId)
+      .select("id, point")
+      .eq("id", form.value.siswa)
       .single();
-
-    if (siswaError || !siswaData) {
-      console.error("Error fetching student points:", siswaError);
+    if (siswaError) {
+      console.error("Error fetching siswa data:", siswaError);
       return;
     }
 
-    console.log("Poin siswa sebelum dikurangi:", siswaData.point); // Log poin siswa sebelum pengurangan
-
-    // Hitung poin yang baru setelah pengurangan
-    const updatedPoints = siswaData.point - jumlahPoin;
-
-    console.log("Poin siswa setelah dikurangi:", updatedPoints); // Log poin siswa setelah dikurangi
-
-    // Perbarui poin siswa di database
+    let updatedPoin = siswaData.point - parseInt(form.value.jumlah_poin);
+    if (updatedPoin < 0) {
+      updatedPoin = 0;
+    }
     const { error: updateError } = await supabase
       .from("siswa")
-      .update({ point: updatedPoints })
-      .eq("id", siswaId);
-
+      .update({ point: updatedPoin })
+      .eq("id", form.value.siswa);
     if (updateError) {
-      console.error("Error updating siswa points:", updateError);
+      console.error("Error updating points:", updateError);
     } else {
-      console.log("Points updated successfully.");
+      console.log("Points updated successfully:", updatedPoin);
+      alert("Poin berhasil dikurangi");
     }
   } catch (error) {
-    console.error("Error in reducePoints:", error);
+    console.error("Error reducing points:", error);
   }
 };
 
-// Mengirim form dan mengurangi poin siswa
 const submitPoin = async () => {
-  try {
-    console.log("Submitting:", form.value); // Debug log
+  console.log("Form Data:", form.value);
+  await ubahPoint();
 
-    // Kurangi poin siswa
-    await reducePoints(form.value.siswa, form.value.sub_jenisp);
+  const dataToInsert = {
+    siswa: form.value.siswa,
+    jenis_p: form.value.jenis_p,
+    sub_jenisp: form.value.sub_jenisp,
+    poin: form.value.poin,
+  };
 
-    // Masukkan data ke tabel 'form_point'
-    const { error } = await supabase.from("form_point").insert([form.value]);
+  const { error } = await supabase.from("form_point").insert([dataToInsert]);
 
-    if (error) {
-      console.error("Error inserting form_point:", error);
-    } else {
-      navigateTo("/"); // Redirect setelah sukses
-    }
-  } catch (error) {
-    console.error("Error in submitPoin:", error);
+  if (error) {
+    console.error("Error inserting data into form_point:", error); // Log error
+    alert("An error occurred: " + error.message);
+  } else {
+    console.log("Data inserted successfully");
+    navigateTo("/");
   }
 };
 
@@ -160,7 +135,7 @@ onMounted(() => {
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center my-4">Tambah Point</h2>
+        <h2 class="text-center my-4">KURANGI POIN</h2>
         <form @submit.prevent="submitPoin">
           <div class="mb-3">
             <input
@@ -197,19 +172,18 @@ onMounted(() => {
           </div>
           <div class="mb-3">
             <input
-              v-model="form.poin"
+              v-model="form.jumlah_poin"
               class="form-control rounded-5"
               type="text"
               placeholder="Jumlah Point"
               readonly
             />
           </div>
-
           <button
             type="submit"
-            class="btn btn-primary text-white rounded-5 px-4 text-center"
+            class="btn btn-outline-primary rounded-5 px-3 text-center"
           >
-            Tambah
+            Submit
           </button>
         </form>
       </div>

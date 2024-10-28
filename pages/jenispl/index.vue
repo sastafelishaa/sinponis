@@ -11,14 +11,20 @@ useHead({
 
 const supabase = useSupabaseClient();
 
+const loading = ref(true);
 const jenis = ref([]);
 
 const jenisPelanggaran = async () => {
+  loading.value = true;
   const { data, error } = await supabase
     .from("sub_jenis_p")
-    .select(`*, jenis_p(*)`)
+    .select(`*, jenis_p(*), poin(id,jumlah_poin)`)
     .order("id", { ascending: true });
-  if (data) jenis.value = data;
+  if (data) {
+    jenis.value = data;
+    // console.log(data);
+    loading.value = false;
+  }
 };
 
 onMounted(() => {
@@ -31,6 +37,10 @@ onMounted(() => {
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center my-4">JENIS PELANGGARAN</h2>
+
+        <h3 v-if="loading" class="text-center text-muted">
+          <em>Tunggu sebentar..</em>
+        </h3>
 
         <div class="accordion" id="accordionExample">
           <div v-for="(jenisp, i) in jenis" :key="i" class="accordion-item">
@@ -55,35 +65,12 @@ onMounted(() => {
                 <ul>
                   <li>Jenis Pelanggaran : {{ jenisp.sub_jenisp }}</li>
                   <li>Konsekwensi : {{ jenisp.konsekw }}</li>
-                  <li>Poin : {{ jenisp.poin }}</li>
+                  <li>Poin : {{ jenisp.poin.jumlah_poin }}</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead class="table-secondary">
-              <tr class="text-center">
-                <td>No</td>
-                <td>Jenis Pelanggaran</td>
-                <td>Sub Jenis Pelanggaran</td>
-                <td>Konsekwensi</td>
-                <td>Point</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(jenisp, i) in jenis" :key="i">
-                <td>{{ i + 1 }}</td>
-                <td>{{ jenisp.jenis_p.jenisp }}</td>
-                <td>{{ jenisp.sub_jenisp }}</td>
-                <td>{{ jenisp.konsekw }}</td>
-                <td>{{ jenisp.poin }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
       </div>
     </div>
   </div>

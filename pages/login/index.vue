@@ -12,16 +12,13 @@ useHead({
 const supabase = useSupabaseClient();
 const email = ref("");
 const password = ref("");
-// const loading = ref(false);
 
 const Login = async () => {
-  // loading.value = true;
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
   });
   if (data) {
-    // loading.value = false;
     navigateTo("/");
   }
   if (error) throw error;
@@ -57,10 +54,8 @@ definePageMeta({
             <br />
             <button
               type="submit"
-              class="btn btn-primary text-white rounded-2 px-4 text-center"
+              class="btn btn-outline-primary text-white rounded-2 px-4 text-center"
             >
-              <!-- <span v-if="loading">LOADING...</span>
-              <span v-else="">LOGIN</span> -->
               <h5>Login</h5>
             </button>
           </form>
