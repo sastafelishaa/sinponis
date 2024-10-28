@@ -54,7 +54,7 @@ definePageMeta({
             <br />
             <button
               type="submit"
-              class="btn btn-outline-primary text-white rounded-2 px-4 text-center"
+              class="btn btn-outline-primary rounded-2 px-4 text-center"
             >
               <h5>Login</h5>
             </button>
