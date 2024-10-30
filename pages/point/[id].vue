@@ -135,7 +135,7 @@ onMounted(() => {
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="text-center my-4">KURANGI POIN</h2>
+        <h2 class="text-center my-4">PENGURANGAN POIN</h2>
         <form @submit.prevent="submitPoin">
           <div class="mb-3">
             <input
