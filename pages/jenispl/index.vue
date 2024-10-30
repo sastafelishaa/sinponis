@@ -1,5 +1,4 @@
 <script setup>
-// Set page title and meta description
 useHead({
   title: "Sinponis",
   meta: [
@@ -10,55 +9,48 @@ useHead({
   ],
 });
 
-// Initialize Supabase client
 const supabase = useSupabaseClient();
 
-// State variables
 const loading = ref(true);
 const groupedJenis = ref({});
 const errorMsg = ref("");
 
-// Function to sanitize IDs by replacing special characters
+// Fungsi untuk membuat id aman dengan mengganti karakter khusus
 function sanitizeId(id) {
-  return id.replace(/[^a-zA-Z0-9-_ ]/g, "-").replace(/\s+/g, "-"); // Replace spaces with dashes
+  return id.replace(/[^a-zA-Z0-9-_]/g, "-");
 }
 
-// Fetch data about violations
-const fetchViolationTypes = async () => {
-  loading.value = true; // Set loading state to true
-
-  // Query Supabase for data
+const jenisPelanggaran = async () => {
+  loading.value = true;
   const { data, error } = await supabase
     .from("sub_jenis_p")
     .select(`*, jenis_p(*), poin(id,jumlah_poin)`)
     .order("id", { ascending: true });
 
-  // Handle errors or process data
   if (error) {
-    errorMsg.value = "Gagal memuat data. Silakan coba lagi."; // Set error message
-    loading.value = false; // Set loading state to false
+    errorMsg.value = "Gagal memuat data. Silakan coba lagi.";
+    loading.value = false;
   } else if (data) {
-    // Group data by violation type
+    // Mengelompokkan data berdasarkan jenis_p.nama dan mengabaikan data yang tidak lengkap
     groupedJenis.value = data.reduce((acc, item) => {
-      const violationType = item.jenis_p?.nama; // Get violation type name
-      if (violationType) {
-        if (!acc[violationType]) {
-          acc[violationType] = {
-            nama: violationType,
+      const namaJenis = item.jenis_p?.nama;
+      if (namaJenis) {
+        if (!acc[namaJenis]) {
+          acc[namaJenis] = {
+            nama: namaJenis,
             items: [],
           };
         }
-        acc[violationType].items.push(item); // Add item to the group
+        acc[namaJenis].items.push(item);
       }
       return acc;
     }, {});
-    loading.value = false; // Set loading state to false after processing data
+    loading.value = false;
   }
 };
 
-// Call fetchViolationTypes when the component is mounted
 onMounted(() => {
-  fetchViolationTypes();
+  jenisPelanggaran();
 });
 </script>
 
@@ -82,8 +74,8 @@ onMounted(() => {
           id="accordionExample"
         >
           <div
-            v-for="(group, index) in groupedJenis"
-            :key="index"
+            v-for="(group, i) in groupedJenis"
+            :key="i"
             class="accordion-item"
           >
             <h2 class="accordion-header">
@@ -91,24 +83,27 @@ onMounted(() => {
                 class="accordion-button collapsed"
                 type="button"
                 data-bs-toggle="collapse"
-                :data-bs-target="'#collapse-' + sanitizeId(group.nama)"
+                :data-bs-target="'#collapse' + sanitizeId(group.nama)"
                 aria-expanded="false"
-                :aria-controls="'collapse-' + sanitizeId(group.nama)"
+                :aria-controls="'collapse' + sanitizeId(group.nama)"
               >
                 {{ group.nama }}
               </button>
             </h2>
             <div
-              :id="'collapse-' + sanitizeId(group.nama)"
+              :id="'collapse' + sanitizeId(group.nama)"
               class="accordion-collapse collapse"
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
                 <ul>
                   <li v-for="item in group.items" :key="item.id">
-                    <strong>Pelanggaran : </strong>{{ item.sub_jenisp }} <br />
-                    <strong>Konsekwensi : </strong>{{ item.konsekw }} <br />
-                    <strong>Poin : </strong>{{ item.poin.jumlah_poin }}
+                    <strong>Pelanggaran : </strong>
+                    {{ item.sub_jenisp }} <br />
+                    <strong>Konsekwensi : </strong>
+                    {{ item.konsekw }} <br />
+                    <strong>Poin : </strong>
+                    {{ item.poin.jumlah_poin }}
                   </li>
                 </ul>
               </div>
