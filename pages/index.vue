@@ -69,7 +69,7 @@ const getSiswa = async () => {
                   :to="`/point/${siswa1.id}`"
                   class="btn btn-warning me-3"
                 >
-                  Kurangi Poin
+                  Pengurangan Poin
                 </nuxt-link>
                 <nuxt-link
                   :to="`/riwayat/${siswa1.id}`"
