@@ -67,13 +67,13 @@ const getSiswa = async () => {
               <li class="list-group-item">
                 <nuxt-link
                   :to="`/point/${siswa1.id}`"
-                  class="btn btn-warning me-3"
+                  class="btn btn-warning me-3 mt-3"
                 >
                   Pengurangan Poin
                 </nuxt-link>
                 <nuxt-link
                   :to="`/riwayat/${siswa1.id}`"
-                  class="btn btn-warning"
+                  class="btn btn-warning mt-3"
                 >
                   Riwayat Pelanggaran
                 </nuxt-link>
