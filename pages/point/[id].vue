@@ -121,7 +121,7 @@ const submitPoin = async () => {
     alert("An error occurred: " + error.message);
   } else {
     console.log("Data inserted successfully");
-    navigateTo("/");
+    navigateTo(`/riwayat/${form.value.siswa}`);
   }
 };
 

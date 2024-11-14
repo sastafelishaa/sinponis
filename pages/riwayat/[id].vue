@@ -4,7 +4,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Halaman Jenis Pelanggaran",
+      content: "Halaman Riwayat Pelanggaran",
     },
   ],
 });
@@ -13,6 +13,7 @@ const supabase = useSupabaseClient();
 const route = useRoute();
 const loading = ref(true);
 const dataPoint = ref([]);
+const selectedSiswa = ref("");
 
 const getData = async () => {
   loading.value = true;
@@ -25,6 +26,11 @@ const getData = async () => {
     .order("id", { ascending: false });
 
   dataPoint.value = data || [];
+  if (dataPoint.value.length > 0) {
+    selectedSiswa.value =
+      dataPoint.value[0].siswa?.nama || "Nama tidak ditemukan";
+  }
+  console.log(dataPoint.value);
   loading.value = false;
 };
 
@@ -42,6 +48,13 @@ onMounted(() => {
         <h3 v-if="loading" class="text-center text-muted">
           <em>Tunggu sebentar..</em>
         </h3>
+
+        <div class="mb-3 text-center">
+          <div v-if="selectedSiswa">
+            <h6>{{ selectedSiswa }}</h6>
+          </div>
+          <!-- <input class="form-control" type="text" readonly /> -->
+        </div>
 
         <div
           class="accordion"
