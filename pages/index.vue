@@ -52,11 +52,7 @@ const getSiswa = async () => {
       <div v-for="(siswa1, i) in siswa" :key="i" class="card pt-4 mt-3">
         <div class="row align-items-start">
           <div class="col-sm-3">
-            <img
-              src="~assets/img/profil.webp"
-              class="img-fluid mb-3"
-              alt="profil"
-            />
+            <img :src="siswa1.poto" class="img-fluid mb-3 ms-4" alt="profil" />
           </div>
           <div class="col-sm-9">
             <ul class="list-group list-group-flush">
